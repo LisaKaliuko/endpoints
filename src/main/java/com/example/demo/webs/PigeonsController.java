@@ -2,7 +2,6 @@ package com.example.demo.webs;
 
 import com.example.demo.model.Pigeon;
 import com.example.demo.services.IPigeonsService;
-import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +31,7 @@ public class PigeonsController {
     }
 
     @GetMapping("/pigeons/{id}")
-    public Pigeon getPigeon(@PathVariable UUID id){
+    public Pigeon getPigeon(@PathVariable UUID id) {
         Optional<Pigeon> pigeon = pigeonsService.getPigeon(id);
 
         if (pigeon.isEmpty()) {

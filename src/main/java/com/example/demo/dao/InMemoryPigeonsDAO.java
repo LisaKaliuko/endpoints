@@ -24,12 +24,12 @@ public class InMemoryPigeonsDAO implements IPigeonsDAO {
     }
 
     @Override
-    public void createPigeon(Pigeon pigeon){
-         pigeons.put(pigeon.getId(), pigeon);
+    public void createPigeon(Pigeon pigeon) {
+        pigeons.put(pigeon.getId(), pigeon);
     }
 
     @Override
-    public Optional<Pigeon> getPigeon(UUID id){
+    public Optional<Pigeon> getPigeon(UUID id) {
         return Optional.ofNullable(pigeons.get(id));
     }
 }

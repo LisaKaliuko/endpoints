@@ -12,4 +12,8 @@ public interface IPigeonsService {
     Pigeon createPigeon(Pigeon pigeon);
 
     Optional<Pigeon> getPigeon(UUID id);
+
+    Optional<Pigeon> deletePigeon(UUID id);
+
+    Optional<Pigeon> updatePigeon(Pigeon pigeon);
 }

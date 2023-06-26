@@ -32,4 +32,14 @@ public class PigeonsService implements IPigeonsService {
     public Optional<Pigeon> getPigeon(UUID id) {
         return pigeonsDAO.getPigeon(id);
     }
+
+    @Override
+    public Optional<Pigeon> deletePigeon(UUID id) {
+        return pigeonsDAO.deletePigeon(id);
+    }
+
+    @Override
+    public Optional<Pigeon> updatePigeon(Pigeon newPigeon){
+        return pigeonsDAO.updatePigeon(newPigeon);
+    }
 }

@@ -40,4 +40,24 @@ public class PigeonsController {
 
         return pigeon.get();
     }
+
+    @DeleteMapping("/pigeons/{id}")
+    public void deletePigeon(@PathVariable UUID id) {
+        Optional<Pigeon> deletedPigeon = pigeonsService.deletePigeon(id);
+
+        if(deletedPigeon.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pigeon not found");
+        }
+    }
+
+    @PutMapping("pigeons/update")
+    public Optional<Pigeon> updatePigeon(@RequestBody Pigeon newPigeon){
+        Optional<Pigeon> pigeon = pigeonsService.updatePigeon(newPigeon);
+
+        if(pigeon.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pigeon not found");
+        }
+
+        return pigeon;
+    }
 }

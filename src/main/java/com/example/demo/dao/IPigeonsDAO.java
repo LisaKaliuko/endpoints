@@ -12,4 +12,8 @@ public interface IPigeonsDAO {
     void createPigeon(Pigeon pigeon);
 
     Optional<Pigeon> getPigeon(UUID id);
+
+    Optional<Pigeon> deletePigeon(UUID id);
+
+    Optional<Pigeon> updatePigeon(Pigeon newPigeon);
 }

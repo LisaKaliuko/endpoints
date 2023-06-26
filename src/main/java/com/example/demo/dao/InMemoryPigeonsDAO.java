@@ -32,4 +32,19 @@ public class InMemoryPigeonsDAO implements IPigeonsDAO {
     public Optional<Pigeon> getPigeon(UUID id) {
         return Optional.ofNullable(pigeons.get(id));
     }
+
+    @Override
+    public Optional<Pigeon> deletePigeon(UUID id) {
+        return Optional.ofNullable(pigeons.remove(id));
+    }
+
+    @Override
+    public Optional<Pigeon> updatePigeon(Pigeon newPigeon) {
+        UUID id = newPigeon.getId();
+        if (pigeons.containsKey(id)) {
+            pigeons.put(id, newPigeon);
+            return Optional.ofNullable(pigeons.get(id));
+        }
+        return null;
+    }
 }

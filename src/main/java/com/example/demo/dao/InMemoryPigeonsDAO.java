@@ -1,10 +1,12 @@
 package com.example.demo.dao;
 
 import com.example.demo.model.Pigeon;
+import com.example.demo.model.PigeonNotFoundException;
 import org.springframework.stereotype.Controller;
 
 import java.util.*;
 
+// rozmawiam z bazą danych (zapytania sql i parsowanie)
 @Controller
 public class InMemoryPigeonsDAO implements IPigeonsDAO {
     private Map<UUID, Pigeon> pigeons = new HashMap<>();
@@ -29,22 +31,31 @@ public class InMemoryPigeonsDAO implements IPigeonsDAO {
     }
 
     @Override
-    public Optional<Pigeon> getPigeon(UUID id) {
-        return Optional.ofNullable(pigeons.get(id));
+    public Pigeon getPigeon(UUID id) throws PigeonNotFoundException {
+        Pigeon pigeon = pigeons.get(id);
+        if (pigeon == null) {
+            throw new PigeonNotFoundException();
+        }
+        return pigeon;
     }
 
     @Override
-    public Optional<Pigeon> deletePigeon(UUID id) {
-        return Optional.ofNullable(pigeons.remove(id));
+    public void deletePigeon(UUID id) throws PigeonNotFoundException {
+        Pigeon pigeon = pigeons.remove(id);
+        if (pigeon == null) {
+            throw new PigeonNotFoundException();
+        }
+
     }
 
     @Override
-    public Optional<Pigeon> updatePigeon(Pigeon newPigeon) {
+    public Pigeon updatePigeon(Pigeon newPigeon) throws  PigeonNotFoundException {
         UUID id = newPigeon.getId();
         if (pigeons.containsKey(id)) {
             pigeons.put(id, newPigeon);
-            return Optional.ofNullable(pigeons.get(id));
+            return newPigeon;
+        } else {
+            throw new PigeonNotFoundException();
         }
-        return null;
     }
 }

@@ -2,6 +2,7 @@ package com.example.demo.services;
 
 import com.example.demo.dao.IPigeonsDAO;
 import com.example.demo.model.Pigeon;
+import com.example.demo.model.PigeonNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -29,7 +30,17 @@ public class PigeonsService implements IPigeonsService {
     }
 
     @Override
-    public Optional<Pigeon> getPigeon(UUID id) {
+    public Pigeon getPigeon(UUID id) throws PigeonNotFoundException {
         return pigeonsDAO.getPigeon(id);
+    }
+
+    @Override
+    public void deletePigeon(UUID id) throws PigeonNotFoundException {
+         pigeonsDAO.deletePigeon(id);
+    }
+
+    @Override
+    public Pigeon updatePigeon(Pigeon newPigeon) throws PigeonNotFoundException{
+        return pigeonsDAO.updatePigeon(newPigeon);
     }
 }
